@@ -14,9 +14,9 @@ public class LibrarianDashboard extends JFrame {
     private final DefaultTableModel issues=Ui.model("Issue ID","Code","Title","Borrower","Issued By","Issued At","Due","Status","Returned At");
 
     public LibrarianDashboard(UserSession session) {
-        super("Library Management System - Librarian");
+        super("College Desk - Library");
         this.session=session;
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(1120,720);
         setLocationRelativeTo(null);
         setJMenuBar(menu());

@@ -14,7 +14,7 @@ public class LoginFrame extends JFrame {
     private final AuthService auth=new AuthService();
 
     public LoginFrame() {
-        super("Library Management System - Login");
+        super("College Desk - Login");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(520,520);
         setMinimumSize(new Dimension(480,480));
@@ -29,12 +29,12 @@ public class LoginFrame extends JFrame {
         card.setBorder(new EmptyBorder(36,42,36,42));
         card.setPreferredSize(new Dimension(400,390));
 
-        JLabel title=new JLabel("Library Desk");
+        JLabel title=new JLabel("College Desk");
         title.setFont(new Font("SansSerif",Font.BOLD,30));
         title.setForeground(Ui.PRIMARY);
         title.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JLabel sub=new JLabel("Secure Admin & Librarian Login");
+        JLabel sub=new JLabel("Secure College Staff Login");
         sub.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         email.setMaximumSize(new Dimension(Integer.MAX_VALUE,38));
@@ -93,8 +93,7 @@ public class LoginFrame extends JFrame {
                         return;
                     }
                     dispose();
-                    if(s.role()==UserSession.Role.ADMIN) new AdminDashboard(s).setVisible(true);
-                    else new LibrarianDashboard(s).setVisible(true);
+                    if(s.role()==UserSession.Role.LIBRARIAN) new LibrarianDashboard(s).setVisible(true); else new CollegeDashboard(s).setVisible(true);
                 } catch(Exception ex) {
                     Throwable c=ex.getCause()==null ? ex : ex.getCause();
                     Ui.error(LoginFrame.this,c instanceof Exception e ? e : new RuntimeException(c));

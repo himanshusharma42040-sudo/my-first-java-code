@@ -1,38 +1,60 @@
-# Swing Library Management System
+# College Desk - Lightweight Swing College ERP
 
-Polished Java Swing + MySQL desktop app based on the original LMS learning code.
+This repository now contains a lightweight Java Swing + MySQL desktop foundation designed to grow from a library app into a sellable college-management product.
 
-## Features
+## Current modules
 
-- Secure Admin / Librarian login
-- PBKDF2-HMAC-SHA256 password hashing with per-user salt
-- Role-based dashboards
-- Admin: view, add, activate/deactivate librarians
-- Librarian: view/add books, issue/return books, view issue history
-- PreparedStatement + try-with-resources
-- Transactions and row locks for issue/return operations
-- Runtime DB configuration; no hard-coded MySQL password
-- Working logout
-- MySQL schema + dummy users + dummy books
+- Secure role-based login
+- College dashboard
+- Departments
+- Programs
+- Student master
+- Attendance
+- Fee invoices and payments
+- Library management
+- Librarian account management
+- Dashboard KPIs
+- Audit-log database foundation
 
-## Demo users
+## Roles
+
+- ADMIN
+- LIBRARIAN
+- FACULTY
+- ACCOUNTANT
+- OFFICE
+
+## Demo login
+
+Base schema creates:
 
 | Role | Email | Password |
 |---|---|---|
 | Admin | `admin@library.local` | `Admin@123` |
 | Librarian | `librarian@library.local` | `Library@123` |
 
+Demo credentials are for local development only.
+
 ## Requirements
 
 - JDK 17+
-- Maven 3.9+
 - MySQL 8+
+- Maven 3.9+ recommended
 
-## Setup
+The application intentionally avoids heavy server frameworks.
+
+## Database setup
+
+Fresh install:
 
 ```bash
 mysql -u root -p < database/lms_schema.sql
+mysql -u root -p < database/college_v2.sql
 ```
+
+The second script upgrades the library database with college ERP tables and additional roles.
+
+## Database connection
 
 Windows PowerShell:
 
@@ -42,9 +64,28 @@ $env:LMS_DB_PASSWORD="YOUR_MYSQL_PASSWORD"
 $env:LMS_DB_URL="jdbc:mysql://localhost:3306/lms_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
 ```
 
-Run:
+## Run
+
+With Maven:
 
 ```bash
 mvn clean compile
 mvn exec:java
 ```
+
+## Lightweight architecture
+
+```text
+Swing UI
+  -> small service classes
+      -> JDBC PreparedStatement
+          -> MySQL
+```
+
+No Spring Boot application server and no ORM is required. Database calls use short-lived connections and transaction boundaries where consistency matters.
+
+## Product roadmap
+
+See `docs/PRODUCT_ROADMAP.md`.
+
+The roadmap covers exams/results, timetable, admissions, payroll, hostel, transport, reports, backup/restore, installer, licensing and optional connected services.

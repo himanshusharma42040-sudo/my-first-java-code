@@ -12,9 +12,9 @@ public class AdminDashboard extends JFrame {
     private final DefaultTableModel model=Ui.model("ID","Name","Email","Status","Created");
 
     public AdminDashboard(UserSession session) {
-        super("Library Management System - Admin");
+        super("College Desk - Library Staff");
         this.session=session;
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(980,650);
         setLocationRelativeTo(null);
         setJMenuBar(menu());
